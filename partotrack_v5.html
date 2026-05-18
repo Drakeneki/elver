@@ -1198,8 +1198,8 @@ function updateGraph(){
   if(currentGraphTab==='cervical'){
     datasets=[
       {label:'Cervical Dilation',data:obs.map((o,i)=>({x:hrs[i],y:o.dilation})),borderColor:'#7C3AED',backgroundColor:'rgba(124,58,237,0.08)',tension:0.4,pointRadius:6,pointBackgroundColor:'#7C3AED',pointBorderColor:'#fff',pointBorderWidth:2,fill:true},
-      {label:'Alert Line',data:hrs.map(h=>({x:h,y:init+h})),borderColor:'#EF4444',borderDash:[6,4],pointRadius:0,tension:0,fill:false},
-      {label:'Action Line',data:hrs.map(h=>({x:h,y:Math.max(0,init+h-4)})),borderColor:'#F59E0B',borderDash:[6,4],pointRadius:0,tension:0,fill:false}
+      {label:'Alert Line',data:(()=>{const maxH=Math.max(...hrs,14);const pts=[];for(let h=0;h<=maxH;h+=0.25){pts.push({x:h,y:Math.min(10,init+h)});}return pts;})(),borderColor:'#EF4444',borderDash:[6,4],pointRadius:0,tension:0,fill:false},
+      {label:'Action Line',data:(()=>{const maxH=Math.max(...hrs,14);const pts=[];for(let h=4;h<=maxH;h+=0.25){pts.push({x:h,y:Math.min(10,init+(h-4))});}return pts;})(),borderColor:'#F59E0B',borderDash:[6,4],pointRadius:0,tension:0,fill:false}
     ];
   } else if(currentGraphTab==='fhr'){
     datasets=[
